@@ -11,7 +11,6 @@ import com.github.javaparser.ast.body.Parameter;
 import com.github.javaparser.ast.expr.MethodCallExpr;
 import com.github.javaparser.ast.expr.VariableDeclarationExpr;
 import com.github.javaparser.resolution.TypeSolver;
-import com.github.javaparser.resolution.UnsolvedSymbolException;
 import com.github.javaparser.resolution.types.ResolvedType;
 import com.github.javaparser.symbolsolver.resolution.typesolvers.ReflectionTypeSolver;
 import com.tmax.ast.dto.ClassDTO;
@@ -299,7 +298,7 @@ public class TypeResolverService {
     try {
       reflectionSolver.solveType(packageName);
       return true;
-    } catch (UnsolvedSymbolException e) {
+    } catch (Exception e) {
       System.out.println("우리가 정의한 레퍼런스 타입입니다:: " + packageName);
       return false;
     }
@@ -336,7 +335,7 @@ public class TypeResolverService {
       // hashcodeDto.setHashcode(hashcodeName);
       hashcodeDto.setHashcode(mdQualifiedSignature);
       return hashcodeDto;
-    } catch (UnsolvedSymbolException e) {
+    } catch (Exception e) {
       return new HashcodeDto();
     }
   }
@@ -347,7 +346,7 @@ public class TypeResolverService {
       ResolvedType varType = vde.getVariable(0).getType().resolve();
       return generateHashcodeByResolvedType(varType);
 
-    } catch (UnsolvedSymbolException e) {
+    } catch (Exception e) {
       return new HashcodeDto();
     }
   }
@@ -358,7 +357,7 @@ public class TypeResolverService {
       ResolvedType fdType = fd.getVariable(0).getType().resolve();
       return generateHashcodeByResolvedType(fdType);
 
-    } catch (UnsolvedSymbolException e) {
+    } catch (Exception e) {
       return new HashcodeDto();
     }
   }
@@ -367,7 +366,7 @@ public class TypeResolverService {
     try {
       ResolvedType resolvedReturnType = md.resolve().getReturnType();
       return generateHashcodeByResolvedType(resolvedReturnType);
-    } catch (UnsolvedSymbolException e) {
+    } catch (Exception e) {
       // 에러 발생 시 null DTO 전달
       return new HashcodeDto();
     }
@@ -382,7 +381,7 @@ public class TypeResolverService {
         returnList.add(currentHashcodeDto);
       }
       return returnList;
-    } catch (UnsolvedSymbolException e) {
+    } catch (Exception e) {
       return returnList;
     }
 
@@ -392,7 +391,7 @@ public class TypeResolverService {
     try {
       ResolvedType resolvedParameterType = pm.resolve().getType();
       return generateHashcodeByResolvedType(resolvedParameterType);
-    } catch (UnsolvedSymbolException e) {
+    } catch (Exception e) {
       return new HashcodeDto();
     }
   }
