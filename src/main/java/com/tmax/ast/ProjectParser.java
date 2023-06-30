@@ -107,9 +107,7 @@ public class ProjectParser {
           mvd.getTypeClassId());
     }
 
-    for (
-
-    StmtVariableDeclarationDTO svd : convertService.getStmtVariableDeclarationDTOList()) {
+    for (StmtVariableDeclarationDTO svd : convertService.getStmtVariableDeclarationDTOList()) {
       System.out.println();
       System.out.printf(
           "StmtVariableDeclarationDTO: { variableId: %d, name: %s, type: %s, typeClassId: %d }\n",
