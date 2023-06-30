@@ -2,15 +2,16 @@ package com.tmax.ast.service;
 
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.Node;
+import com.github.javaparser.ast.body.FieldDeclaration;
+import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.body.Parameter;
-import com.github.javaparser.ast.expr.Expression;
 import com.github.javaparser.ast.expr.MethodCallExpr;
-import com.github.javaparser.resolution.UnsolvedSymbolException;
-import com.google.common.reflect.TypeResolver;
+import com.github.javaparser.ast.expr.VariableDeclarationExpr;
+import com.github.javaparser.resolution.types.ResolvedType;
 import com.tmax.ast.dto.*;
 import com.tmax.ast.service.management.*;
-import com.tmax.ast.service.Resolver.TypeMapper;
 import com.tmax.ast.service.Resolver.TypeResolverService;
+import com.tmax.ast.service.Resolver.dto.HashcodeDto;
 
 import java.util.*;
 
@@ -25,8 +26,6 @@ public class ConvertService {
 
   private final VariableService variableService = new VariableService();
   private final MethodService methodService = new MethodService();
-
-  private final TypeResolverService typeResolver = new TypeResolverService();
 
   public List<BlockDTO> getBlockDTOList() {
     return blockService.getBlockDTOList();
@@ -76,6 +75,8 @@ public class ConvertService {
   }
 
   private BlockDTO visitAndBuildRoot(CompilationUnit cu) {
+    TypeResolverService trs = TypeResolverService.getInstance();
+
     String nodeType = cu.getMetaModel().getTypeName();
     BlockDTO rootBlockDTO = blockService.buildBlock(blockId++, 1, null, nodeType, cu);
 
@@ -96,8 +97,18 @@ public class ConvertService {
           importService.buildImport(importId++, rootBlockDTO.getBlockId(), node);
           break;
         case "ClassOrInterfaceDeclaration":
-          classService.buildClass(classId++, rootBlockDTO.getBlockId(),
+          ClassDTO classDto = classService.buildClass(classId++, rootBlockDTO.getBlockId(),
               packageDTO != null ? packageDTO.getPackageId() : 0L, node);
+          // TypeMapper Test Code
+          String hashcode = TypeResolverService.getMyHashcode(node);
+          if (!hashcode.isBlank()) {
+            // 자기 자신 dto를 hashcode와 함께 등록
+            trs.registerOriginDtoService(hashcode, classDto);
+            // 자기 자신이 생기기 전 모든 참조 dto에 내 id 등록
+            trs.registerOriginClassIdToPTM(hashcode);
+            trs.registerOriginClassIdToRTM(hashcode);
+            trs.registerOriginClassIdToVTM(hashcode);
+          }
           break;
         case "EnumDeclaration":
           classService.buildEnum(classId++, rootBlockDTO.getBlockId(),
@@ -115,24 +126,37 @@ public class ConvertService {
   }
 
   private void visitAndBuild(Node node, BlockDTO parentBlockDTO) {
+    TypeResolverService trs = TypeResolverService.getInstance();
     BlockDTO blockDTO;
     String nodeType = node.getMetaModel().getTypeName();
     if (nodeType.equals("ClassOrInterfaceDeclaration") || nodeType.equals("EnumDeclaration") ||
         nodeType.equals("AnnotationDeclaration") || nodeType.equals("RecordDeclaration")) {
       blockDTO = blockService.buildBlock(blockId++, parentBlockDTO.getDepth() + 1, parentBlockDTO.getBlockId(),
           nodeType, node);
+
     }
     // 클래스 바로 아래에서 변수를 선언하는 멤버 필드
     else if (nodeType.equals("FieldDeclaration")) {
       blockDTO = parentBlockDTO;
       ClassDTO belongedClassDTO = classService.getClassDTOList().get(classService.getClassDTOList().size() - 1);
-      variableService.buildVariableDeclInMemberField(variableDeclarationId++, blockDTO.getBlockId(),
+      MemberVariableDeclarationDTO mvdDto = variableService.buildVariableDeclInMemberField(variableDeclarationId++,
+          blockDTO.getBlockId(),
           belongedClassDTO.getClassId(), node);
+
+      // TypeMapper Test code
+      HashcodeDto hashcodeDto = TypeResolverService.generateClassHashcode((FieldDeclaration) node);
+      trs.registerRefDtoService(hashcodeDto, mvdDto);
+
     }
     // 함수 내에서 선언하는 변수
     else if (nodeType.equals("VariableDeclarationExpr")) {
       blockDTO = parentBlockDTO;
-      variableService.buildVariableDeclInMethod(variableDeclarationId++, blockDTO.getBlockId(), node);
+      StmtVariableDeclarationDTO svdDto = variableService.buildVariableDeclInMethod(variableDeclarationId++,
+          blockDTO.getBlockId(), node);
+
+      // TypeMapper Test code
+      HashcodeDto hashcodeDto = TypeResolverService.generateClassHashcode((VariableDeclarationExpr) node);
+      trs.registerRefDtoService(hashcodeDto, svdDto);
     }
     //
     else if (nodeType.equals("MethodDeclaration") || nodeType.equals("ConstructorDeclaration")) {
@@ -141,14 +165,40 @@ public class ConvertService {
       blockDTO = parentBlockDTO;
       // 함수 및 생성자 선언 시 build
       ClassDTO belongedClassDTO = classService.getClassDTOList().get(classService.getClassDTOList().size() - 1);
-      methodService.buildMethodDeclaration(methodDeclarationId++, blockDTO.getBlockId(), belongedClassDTO.getClassId(),
+      MethodDeclarationDTO mdDto = methodService.buildMethodDeclaration(methodDeclarationId++, blockDTO.getBlockId(),
+          belongedClassDTO.getClassId(),
           node, nodeType);
 
-      // TypeMapper 테스트
+      // TypeMapper Test code
+      // 함수 선언일때만 hashcode 가져옴
+      String hashcode = TypeResolverService.getMyHashcode(node);
+      if (!hashcode.isBlank()) {
+        // 나 자신의 dto를 typeMapper에 등록
+        trs.registerOriginDtoService(hashcode, mdDto);
+        // 그 전에 나를 참조했던 모든 MethodCallExpr에 내 Id 등록
+        trs.registerOriginMethodDeclarationId(hashcode);
+
+        // 메소드 선언 내에서 리턴 타입의 hashcode 생성 및 등록
+        ReturnMapperDTO returnMapperDTO = mdDto.getReturnMapper();
+
+        if (returnMapperDTO != null) { // 리턴 타입이 있는 경우에만
+          HashcodeDto returnHashcodeDto = TypeResolverService.generateReturnTypeHashcode((MethodDeclaration) node);
+          trs.registerRefDtoService(returnHashcodeDto, returnMapperDTO);
+        }
+
+        // 파라미터는 DTO 생성될 때 수정하는 걸로 추후에 변경하기
+        // List<HashcodeDto> parameterHashcodeList = TypeResolverService
+        // .getParameterHashcodeList((MethodDeclaration) node);
+
+      }
 
     } else if (nodeType.equals("MethodCallExpr")) {
       blockDTO = parentBlockDTO;
-      methodService.buildMethodCallExpr(methodCallExprId++, blockDTO.getBlockId(), node, nodeType);
+      MethodCallExprDTO mceDto = methodService.buildMethodCallExpr(methodCallExprId++, blockDTO.getBlockId(), node,
+          nodeType);
+      // TypeMapper Test code
+      HashcodeDto hashcodeDto = TypeResolverService.generateMethodDeclarationHashCode((MethodCallExpr) node);
+      trs.registerRefDtoService(hashcodeDto, mceDto);
 
     } else if (nodeType.equals("BlockStmt")) {
       blockDTO = blockService.buildBlock(blockId++, parentBlockDTO.getDepth() + 1, parentBlockDTO.getBlockId(),
@@ -162,15 +212,6 @@ public class ConvertService {
           !childNode.getMetaModel().getTypeName().equals("Modifier")) {
         visitAndBuild(childNode, blockDTO);
       }
-    }
-  }
-
-  private <T extends MethodCallExpr> String getResolveHashcode(T node) {
-    try {
-      System.out.println(node.resolve().toAst(null));
-      return "";
-    } catch (UnsolvedSymbolException e) {
-      return "";
     }
   }
 

@@ -42,7 +42,8 @@ public class MethodService {
     this.methodCallExprDTOList.clear();
   }
 
-  public void buildMethodDeclaration(Long methodDeclarationId, Long blockId, Long belongedClassId, Node node,
+  public MethodDeclarationDTO buildMethodDeclaration(Long methodDeclarationId, Long blockId, Long belongedClassId,
+      Node node,
       String nodeType) {
     MethodDeclarationDTO methodDeclarationDTO = new MethodDeclarationDTO();
     ReturnMapperDTO returnMapperDTO = new ReturnMapperDTO();
@@ -53,7 +54,7 @@ public class MethodService {
     String methodName = "";
 
     if (nodeType.equals("ConstructorDeclaration")) {
-      System.out.println(node);
+      System.out.println("Constructor입니다!!" + node);
     }
 
     int parameterIndex = 1;
@@ -133,9 +134,10 @@ public class MethodService {
             node.getRange().get().end.column));
 
     methodDeclarationDTOList.add(methodDeclarationDTO);
+    return methodDeclarationDTO;
   }
 
-  public void buildMethodCallExpr(Long methodCallExprId, Long blockId, Node node, String nodeType) {
+  public MethodCallExprDTO buildMethodCallExpr(Long methodCallExprId, Long blockId, Node node, String nodeType) {
     MethodCallExprDTO methodCallExprDTO = new MethodCallExprDTO();
     MethodCallExpr methodCallExpr = (MethodCallExpr) node;
     List<Node> childNodes = node.getChildNodes();
@@ -196,6 +198,7 @@ public class MethodService {
     methodCallExprDTO.setNameExpr(varName);
 
     methodCallExprDTOList.add(methodCallExprDTO);
+    return methodCallExprDTO;
 
   }
 

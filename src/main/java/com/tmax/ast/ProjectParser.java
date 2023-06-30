@@ -4,8 +4,15 @@ import com.github.javaparser.ParseResult;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.symbolsolver.utils.SymbolSolverCollectionStrategy;
 import com.github.javaparser.utils.*;
+import com.tmax.ast.dto.ClassDTO;
+import com.tmax.ast.dto.MemberVariableDeclarationDTO;
+import com.tmax.ast.dto.MethodCallExprDTO;
+import com.tmax.ast.dto.MethodDeclarationDTO;
+import com.tmax.ast.dto.ReturnMapperDTO;
+import com.tmax.ast.dto.StmtVariableDeclarationDTO;
 import com.tmax.ast.service.ConvertService;
 import com.tmax.ast.service.OutputService;
+import com.tmax.ast.service.Resolver.TypeResolverService;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -21,6 +28,7 @@ public class ProjectParser {
   private static final OutputService outputService = new OutputService();
 
   public static void main(String[] args) throws IOException {
+    long beforeTime = System.currentTimeMillis();
     ConvertService convertService = new ConvertService();
     // 파싱할 프로젝트 루트 경로
     Path root = Paths.get(("/Users/krk224/Documents/Tmax/1_source/javaParser/java-baseball_origin"));
@@ -67,8 +75,8 @@ public class ProjectParser {
 
     }
 
-    convertService.visitVariablesAndBuildClassId();
-    convertService.visitMethodsAndBuildClassId();
+    // convertService.visitVariablesAndBuildClassId();
+    // convertService.visitMethodsAndBuildClassId();
 
     // 출력
     System.out.println(convertService.getBlockDTOList());
@@ -82,7 +90,62 @@ public class ProjectParser {
     System.out.println(convertService.getMethodDeclarationDTOList());
     System.out.println(convertService.getMethodCallExprDTOList());
 
+    // 원하는 파트만 출력
+
+    // for (ClassDTO cDto : convertService.getClassDTOList()) {
+    // System.out.println();
+    // System.out.printf("CLASSDTO: { classId: %d, name: %s, type: %s } \n",
+    // cDto.getClassId(), cDto.getName(),
+    // cDto.getType());
+    // }
+
+    // for (MemberVariableDeclarationDTO mvd :
+    // convertService.getMemberVariableDeclarationDTOList()) {
+    // System.out.println();
+    // System.out.printf(
+    // "MemberVariableDeclarationDTO: { variableId: %d, name: %s, belongedClassId:
+    // %d, type: %s, typeClassId: %d } \n",
+    // mvd.getVariableId(), mvd.getName(), mvd.getBelongedClassId(), mvd.getType(),
+    // mvd.getTypeClassId());
+    // }
+
+    // for (StmtVariableDeclarationDTO svd :
+    // convertService.getStmtVariableDeclarationDTOList()) {
+    // System.out.println();
+    // System.out.printf(
+    // "StmtVariableDeclarationDTO: { variableId: %d, name: %s, type: %s,
+    // typeClassId: %d } \n",
+    // svd.getVariableId(), svd.getName(), svd.getType(), svd.getTypeClassId());
+    // }
+
+    // for (MethodDeclarationDTO md : convertService.getMethodDeclarationDTOList())
+    // {
+    // System.out.println();
+    // ReturnMapperDTO rm = md.getReturnMapper();
+    // System.out.printf(
+    // "MethodDeclarationDTO: { methodDeclarationId: %d, name: %s, belongedClassId:
+    // %d } \n",
+    // md.getMethodDeclId(), md.getName(), md.getBelongedClassId());
+    // System.out.printf("\tReturnMapperDto: { returnMapperId: %d, methodDeclId: %d,
+    // type: %s, typeClassId: %d } \n",
+    // rm.getReturnMapperId(), rm.getMethodDeclId(), rm.getType(),
+    // rm.getTypeClassId());
+    // }
+
+    // for (MethodCallExprDTO mce : convertService.getMethodCallExprDTOList()) {
+    // System.out.println();
+    // System.out.printf(
+    // "MethodCallExprDTO: { methodCallExprId: %d, name: %s, NameExpr: %s,
+    // NameExprDeclarationId: %d } \n",
+    // mce.getMethodCallExprId(), mce.getName(), mce.getNameExpr(),
+    // mce.getNameExprTypeClassId());
+    // }
+
     convertService.clear();
+    TypeResolverService.clear();
+
+    long afterTime = System.currentTimeMillis();
+    System.out.println("걸린 시간:: " + (afterTime - beforeTime));
   }
 
   private static void saveSourceCodesInOutputDir(SourceRoot sourceRoot) {
