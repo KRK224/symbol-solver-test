@@ -76,6 +76,7 @@ public class ProjectParser {
     }
     convertService.visitVariablesAndBuildClassId();
     convertService.visitMethodsAndBuildClassId();
+    convertService.visitMethodCallExpr();
 
     // 출력
     // System.out.println(convertService.getBlockDTOList());
