@@ -1,0 +1,331 @@
+StmtVariableDeclarationDTO: { variableId: 1, name: game, type: Game, typeClassId: 5 }
+
+StmtVariableDeclarationDTO: { variableId: 4, name: input, type: String, typeClassId: 0 }
+
+StmtVariableDeclarationDTO: { variableId: 5, name: number, type: int, typeClassId: 0 }
+
+StmtVariableDeclarationDTO: { variableId: 7, name: code, type: String, typeClassId: 0 }
+
+StmtVariableDeclarationDTO: { variableId: 20, name: inputs, type: String[], typeClassId: 0 }
+
+StmtVariableDeclarationDTO: { variableId: 21, name: strike, type: int, typeClassId: 0 }
+
+StmtVariableDeclarationDTO: { variableId: 22, name: ball, type: int, typeClassId: 0 }
+
+StmtVariableDeclarationDTO: { variableId: 23, name: status, type: String, typeClassId: 0 }
+
+StmtVariableDeclarationDTO: { variableId: 24, name: randomNumberList, type: List<Integer>, typeClassId: 0 }
+
+StmtVariableDeclarationDTO: { variableId: 25, name: random, type: Random, typeClassId: 0 }
+
+StmtVariableDeclarationDTO: { variableId: 26, name: randomNumber, type: int, typeClassId: 0 }
+
+StmtVariableDeclarationDTO: { variableId: 27, name: test, type: List<Integer>, typeClassId: 0 }
+
+StmtVariableDeclarationDTO: { variableId: 28, name: result, type: int, typeClassId: 0 }
+
+StmtVariableDeclarationDTO: { variableId: 29, name: count, type: int, typeClassId: 0 }
+
+StmtVariableDeclarationDTO: { variableId: 30, name: i, type: int, typeClassId: 0 }
+
+StmtVariableDeclarationDTO: { variableId: 37, name: computer, type: Computer, typeClassId: 12 }
+
+MethodDeclarationDTO: { methodDeclarationId: 1, name: main, belongedClassId: 1 }
+        ReturnMapperDto:  { returnMapperId: 1, methodDeclId: 1,type: void,typeClassId: 0}
+
+MethodDeclarationDTO: { methodDeclarationId: 2, name: Player, belongedClassId: 2 }
+        ReturnMapperDto:  { returnMapperId: null, methodDeclId: null,type: null,typeClassId: null}
+
+MethodDeclarationDTO: { methodDeclarationId: 3, name: getNumbers, belongedClassId: 2 }
+        ReturnMapperDto:  { returnMapperId: 2, methodDeclId: 3,type: List<Integer>,typeClassId: 0}
+
+MethodDeclarationDTO: { methodDeclarationId: 4, name: generateNumbers, belongedClassId: 2 }
+        ReturnMapperDto:  { returnMapperId: 3, methodDeclId: 4,type: void,typeClassId: 0}
+
+MethodDeclarationDTO: { methodDeclarationId: 5, name: isBaseballGameSize, belongedClassId: 2 }
+        ReturnMapperDto:  { returnMapperId: 4, methodDeclId: 5,type: void,typeClassId: 0}
+
+MethodDeclarationDTO: { methodDeclarationId: 6, name: isMatch, belongedClassId: 2 }
+        ReturnMapperDto:  { returnMapperId: 5, methodDeclId: 6,type: void,typeClassId: 0}
+
+MethodDeclarationDTO: { methodDeclarationId: 7, name: isExist, belongedClassId: 2 }
+        ReturnMapperDto:  { returnMapperId: 6, methodDeclId: 7,type: boolean,typeClassId: 0}
+
+MethodDeclarationDTO: { methodDeclarationId: 8, name: buildNumbers, belongedClassId: 2 }
+        ReturnMapperDto:  { returnMapperId: 7, methodDeclId: 8,type: void,typeClassId: 0}
+
+MethodDeclarationDTO: { methodDeclarationId: 9, name: clearSet, belongedClassId: 2 }
+        ReturnMapperDto:  { returnMapperId: 8, methodDeclId: 9,type: void,typeClassId: 0}
+
+MethodDeclarationDTO: { methodDeclarationId: 10, name: Input, belongedClassId: 3 }
+        ReturnMapperDto:  { returnMapperId: null, methodDeclId: null,type: null,typeClassId: null}
+
+MethodDeclarationDTO: { methodDeclarationId: 11, name: getRetry, belongedClassId: 3 }
+        ReturnMapperDto:  { returnMapperId: 9, methodDeclId: 11,type: int,typeClassId: 0}
+
+MethodDeclarationDTO: { methodDeclarationId: 12, name: getNumber, belongedClassId: 3 }
+        ReturnMapperDto:  { returnMapperId: 10, methodDeclId: 12,type: String[],typeClassId: 0}
+
+MethodDeclarationDTO: { methodDeclarationId: 13, name: Message, belongedClassId: 4 }
+        ReturnMapperDto:  { returnMapperId: null, methodDeclId: null,type: null,typeClassId: null}
+
+MethodDeclarationDTO: { methodDeclarationId: 14, name: getInputNumberToPlay, belongedClassId: 4 }
+        ReturnMapperDto:  { returnMapperId: 11, methodDeclId: 14,type: String,typeClassId: 0}
+
+MethodDeclarationDTO: { methodDeclarationId: 15, name: getStatus, belongedClassId: 4 }
+        ReturnMapperDto:  { returnMapperId: 12, methodDeclId: 15,type: String,typeClassId: 0}
+
+MethodDeclarationDTO: { methodDeclarationId: 16, name: getThreeStrike, belongedClassId: 4 }
+        ReturnMapperDto:  { returnMapperId: 13, methodDeclId: 16,type: String,typeClassId: 0}
+
+MethodDeclarationDTO: { methodDeclarationId: 17, name: getRetry, belongedClassId: 4 }
+        ReturnMapperDto:  { returnMapperId: 14, methodDeclId: 17,type: String,typeClassId: 0}
+
+MethodDeclarationDTO: { methodDeclarationId: 18, name: getNothing, belongedClassId: 4 }
+        ReturnMapperDto:  { returnMapperId: 15, methodDeclId: 18,type: String,typeClassId: 0}
+
+MethodDeclarationDTO: { methodDeclarationId: 19, name: getBall, belongedClassId: 4 }
+        ReturnMapperDto:  { returnMapperId: 16, methodDeclId: 19,type: String,typeClassId: 0}
+
+MethodDeclarationDTO: { methodDeclarationId: 20, name: getStrike, belongedClassId: 4 }
+        ReturnMapperDto:  { returnMapperId: 17, methodDeclId: 20,type: String,typeClassId: 0}
+
+MethodDeclarationDTO: { methodDeclarationId: 21, name: Game, belongedClassId: 5 }
+        ReturnMapperDto:  { returnMapperId: null, methodDeclId: null,type: null,typeClassId: null}
+
+MethodDeclarationDTO: { methodDeclarationId: 22, name: testing, belongedClassId: 5 }
+        ReturnMapperDto:  { returnMapperId: 18, methodDeclId: 22,type: Computer,typeClassId: 12}
+
+MethodDeclarationDTO: { methodDeclarationId: 23, name: init, belongedClassId: 5 }
+        ReturnMapperDto:  { returnMapperId: 19, methodDeclId: 23,type: void,typeClassId: 0}
+
+MethodDeclarationDTO: { methodDeclarationId: 24, name: play, belongedClassId: 5 }
+        ReturnMapperDto:  { returnMapperId: 20, methodDeclId: 24,type: void,typeClassId: 0}
+
+MethodDeclarationDTO: { methodDeclarationId: 25, name: retry, belongedClassId: 5 }
+        ReturnMapperDto:  { returnMapperId: 21, methodDeclId: 25,type: boolean,typeClassId: 0}
+
+MethodDeclarationDTO: { methodDeclarationId: 26, name: generate, belongedClassId: 6 }
+        ReturnMapperDto:  { returnMapperId: 22, methodDeclId: 26,type: List<Integer>,typeClassId: 0}
+
+MethodDeclarationDTO: { methodDeclarationId: 27, name: generate, belongedClassId: 7 }
+        ReturnMapperDto:  { returnMapperId: 23, methodDeclId: 27,type: List<Integer>,typeClassId: 0}
+
+MethodDeclarationDTO: { methodDeclarationId: 28, name: getTotalCount, belongedClassId: 8 }
+        ReturnMapperDto:  { returnMapperId: 24, methodDeclId: 28,type: int,typeClassId: 0}
+
+MethodDeclarationDTO: { methodDeclarationId: 29, name: getStrikeCount, belongedClassId: 8 }
+        ReturnMapperDto:  { returnMapperId: 25, methodDeclId: 29,type: int,typeClassId: 0}
+
+MethodDeclarationDTO: { methodDeclarationId: 30, name: getBallCount, belongedClassId: 8 }
+        ReturnMapperDto:  { returnMapperId: 26, methodDeclId: 30,type: int,typeClassId: 0}
+
+MethodDeclarationDTO: { methodDeclarationId: 31, name: GameStatus, belongedClassId: 10 }
+        ReturnMapperDto:  { returnMapperId: null, methodDeclId: null,type: null,typeClassId: null}
+
+MethodDeclarationDTO: { methodDeclarationId: 32, name: getCode, belongedClassId: 10 }
+        ReturnMapperDto:  { returnMapperId: 27, methodDeclId: 32,type: Integer,typeClassId: 0}
+
+MethodDeclarationDTO: { methodDeclarationId: 33, name: printNowLine, belongedClassId: 11 }
+        ReturnMapperDto:  { returnMapperId: 28, methodDeclId: 33,type: void,typeClassId: 0}
+
+MethodDeclarationDTO: { methodDeclarationId: 34, name: printNewLine, belongedClassId: 11 }
+        ReturnMapperDto:  { returnMapperId: 29, methodDeclId: 34,type: void,typeClassId: 0}
+
+MethodDeclarationDTO: { methodDeclarationId: 35, name: Computer, belongedClassId: 12 }
+        ReturnMapperDto:  { returnMapperId: null, methodDeclId: null,type: null,typeClassId: null}
+
+MethodDeclarationDTO: { methodDeclarationId: 36, name: createAnswerWithRandom, belongedClassId: 12 }
+        ReturnMapperDto:  { returnMapperId: 30, methodDeclId: 36,type: void,typeClassId: 0}
+
+MethodDeclarationDTO: { methodDeclarationId: 37, name: createAnswerWithFixed, belongedClassId: 12 }
+        ReturnMapperDto:  { returnMapperId: 31, methodDeclId: 37,type: void,typeClassId: 0}
+
+MethodDeclarationDTO: { methodDeclarationId: 38, name: getAnswer, belongedClassId: 12 }
+        ReturnMapperDto:  { returnMapperId: 32, methodDeclId: 38,type: List<Integer>,typeClassId: 0}
+
+MethodDeclarationDTO: { methodDeclarationId: 39, name: generate, belongedClassId: 13 }
+        ReturnMapperDto:  { returnMapperId: 33, methodDeclId: 39,type: List<Integer>,typeClassId: 0}
+
+MethodDeclarationDTO: { methodDeclarationId: 40, name: 고정넘버생성_Test, belongedClassId: 14 }
+        ReturnMapperDto:  { returnMapperId: 34, methodDeclId: 40,type: void,typeClassId: 0}
+
+MethodCallExprDTO: { methodCallExprId: 1, name: play, NameExpr: game, NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 2, name: isBaseballGameSize, NameExpr: , NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 3, name: isMatch, NameExpr: , NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 4, name: buildNumbers, NameExpr: , NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 5, name: clearSet, NameExpr: , NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 6, name: matches, NameExpr: input, NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 7, name: parseInt, NameExpr: Integer, NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 8, name: isExist, NameExpr: , NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 9, name: contains, NameExpr: numberSet, NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 10, name: add, NameExpr: numberSet, NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 11, name: collect, NameExpr: , NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 12, name: boxed, NameExpr: , NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 13, name: mapToInt, NameExpr: , NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 14, name: stream, NameExpr: Arrays, NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 15, name: toList, NameExpr: Collectors, NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 16, name: clear, NameExpr: numberSet, NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 17, name: next, NameExpr: scanner, NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 18, name: matches, NameExpr: code, NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 19, name: parseInt, NameExpr: Integer, NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 20, name: split, NameExpr: , NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 21, name: next, NameExpr: scanner, NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 22, name: getNothing, NameExpr: , NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 23, name: getThreeStrike, NameExpr: , NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 24, name: getBall, NameExpr: , NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 25, name: getStrike, NameExpr: , NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 26, name: createAnswerWithRandom, NameExpr: computer, NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 27, name: getCode, NameExpr: , NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 28, name: init, NameExpr: , NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 29, name: equals, NameExpr: gameStatus, NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 30, name: getCode, NameExpr: , NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 31, name: printNewLine, NameExpr: output, NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 32, name: toString, NameExpr: , NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 33, name: getAnswer, NameExpr: computer, NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 34, name: printNowLine, NameExpr: output, NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 35, name: getInputNumberToPlay, NameExpr: Message, NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 36, name: getNumber, NameExpr: input, NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 37, name: generateNumbers, NameExpr: player, NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 38, name: printNewLine, NameExpr: output, NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 39, name: toString, NameExpr: , NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 40, name: getNumbers, NameExpr: player, NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 41, name: getStrikeCount, NameExpr: judgement, NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 42, name: getAnswer, NameExpr: computer, NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 43, name: getNumbers, NameExpr: player, NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 44, name: getBallCount, NameExpr: judgement, NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 45, name: getAnswer, NameExpr: computer, NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 46, name: getNumbers, NameExpr: player, NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 47, name: getStatus, NameExpr: Message, NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 48, name: printNewLine, NameExpr: output, NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 49, name: equals, NameExpr: status, NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 50, name: getThreeStrike, NameExpr: Message, NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 51, name: retry, NameExpr: , NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 52, name: init, NameExpr: , NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 53, name: getCode, NameExpr: , NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 54, name: println, NameExpr: , NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 55, name: println, NameExpr: , NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 56, name: println, NameExpr: , NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 57, name: printNewLine, NameExpr: output, NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 58, name: getRetry, NameExpr: Message, NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 59, name: getRetry, NameExpr: input, NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 60, name: getCode, NameExpr: , NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 61, name: size, NameExpr: randomNumberList, NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 62, name: nextInt, NameExpr: random, NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 63, name: contains, NameExpr: randomNumberList, NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 64, name: add, NameExpr: randomNumberList, NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 65, name: asList, NameExpr: Arrays, NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 66, name: collect, NameExpr: , NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 67, name: filter, NameExpr: , NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 68, name: stream, NameExpr: inputNumber, NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 69, name: contains, NameExpr: computer, NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 70, name: toList, NameExpr: Collectors, NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 71, name: println, NameExpr: , NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 72, name: count, NameExpr: , NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 73, name: filter, NameExpr: , NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 74, name: stream, NameExpr: inputNumber, NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 75, name: size, NameExpr: inputNumber, NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 76, name: equals, NameExpr: Objects, NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 77, name: get, NameExpr: computer, NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 78, name: get, NameExpr: inputNumber, NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 79, name: getTotalCount, NameExpr: , NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 80, name: getStrikeCount, NameExpr: , NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 81, name: print, NameExpr: , NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 82, name: println, NameExpr: , NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 83, name: start, NameExpr: , NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 84, name: println, NameExpr: , NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 85, name: generate, NameExpr: randomNumberGenerator, NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 86, name: generate, NameExpr: fixedNumberGenerator, NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 87, name: createAnswerWithFixed, NameExpr: computer, NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 88, name: assertEquals, NameExpr: , NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 89, name: toString, NameExpr: , NameExprDeclarationId: null }
+
+MethodCallExprDTO: { methodCallExprId: 90, name: getAnswer, NameExpr: computer, NameExprDeclarationId: null }

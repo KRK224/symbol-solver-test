@@ -4,6 +4,10 @@ import com.github.javaparser.ParseResult;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.symbolsolver.utils.SymbolSolverCollectionStrategy;
 import com.github.javaparser.utils.*;
+import com.tmax.ast.dto.MethodCallExprDTO;
+import com.tmax.ast.dto.MethodDeclarationDTO;
+import com.tmax.ast.dto.StmtVariableDeclarationDTO;
+import com.tmax.ast.dto.ReturnMapperDTO;
 import com.tmax.ast.service.ConvertService;
 import com.tmax.ast.service.OutputService;
 
@@ -72,16 +76,40 @@ public class ProjectParser {
     convertService.visitMethodsAndBuildClassId();
 
     // 출력
-    System.out.println(convertService.getBlockDTOList());
-    System.out.println(convertService.getPackageDTOList());
-    System.out.println(convertService.getImportDTOList());
-    System.out.println(convertService.getClassDTOList());
+    // System.out.println(convertService.getBlockDTOList());
+    // System.out.println(convertService.getPackageDTOList());
+    // System.out.println(convertService.getImportDTOList());
+    // System.out.println(convertService.getClassDTOList());
 
-    System.out.println(convertService.getMemberVariableDeclarationDTOList());
-    System.out.println(convertService.getStmtVariableDeclarationDTOList());
+    // System.out.println(convertService.getMemberVariableDeclarationDTOList());
+    // System.out.println(convertService.getStmtVariableDeclarationDTOList());
 
-    System.out.println(convertService.getMethodDeclarationDTOList());
-    System.out.println(convertService.getMethodCallExprDTOList());
+    // System.out.println(convertService.getMethodDeclarationDTOList());
+    // System.out.println(convertService.getMethodCallExprDTOList());
+
+    for (StmtVariableDeclarationDTO svd : convertService.getStmtVariableDeclarationDTOList()) {
+      System.out.println();
+      System.out.printf(
+          "StmtVariableDeclarationDTO: { variableId: %d, name: %s, type: %s, typeClassId: %d }\n",
+          svd.getVariableId(), svd.getName(), svd.getType(), svd.getTypeClassId());
+    }
+
+    for (MethodDeclarationDTO md : convertService.getMethodDeclarationDTOList()) {
+      System.out.println();
+      ReturnMapperDTO rm = md.getReturnMapper();
+      System.out.printf(
+          "MethodDeclarationDTO: { methodDeclarationId: %d, name: %s, belongedClassId: %d }\n", md.getMethodDeclId(),
+          md.getName(), md.getBelongedClassId());
+      System.out.printf("\tReturnMapperDto:  { returnMapperId: %d, methodDeclId: %d,type: %s,typeClassId: %d}\n",
+          rm.getReturnMapperId(), rm.getMethodDeclId(), rm.getType(), rm.getTypeClassId());
+    }
+
+    for (MethodCallExprDTO mce : convertService.getMethodCallExprDTOList()) {
+      System.out.println();
+      System.out.printf(
+          "MethodCallExprDTO: { methodCallExprId: %d, name: %s, NameExpr: %s, NameExprDeclarationId: %d }\n",
+          mce.getMethodCallExprId(), mce.getName(), mce.getNameExpr(), mce.getNameExprTypeClassId());
+    }
 
     convertService.clear();
     long afterTime = System.currentTimeMillis();
