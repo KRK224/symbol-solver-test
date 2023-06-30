@@ -79,67 +79,59 @@ public class ProjectParser {
     // convertService.visitMethodsAndBuildClassId();
 
     // 출력
-    System.out.println(convertService.getBlockDTOList());
-    System.out.println(convertService.getPackageDTOList());
-    System.out.println(convertService.getImportDTOList());
-    System.out.println(convertService.getClassDTOList());
+    // System.out.println(convertService.getBlockDTOList());
+    // System.out.println(convertService.getPackageDTOList());
+    // System.out.println(convertService.getImportDTOList());
+    // System.out.println(convertService.getClassDTOList());
 
-    System.out.println(convertService.getMemberVariableDeclarationDTOList());
-    System.out.println(convertService.getStmtVariableDeclarationDTOList());
+    // System.out.println(convertService.getMemberVariableDeclarationDTOList());
+    // System.out.println(convertService.getStmtVariableDeclarationDTOList());
 
-    System.out.println(convertService.getMethodDeclarationDTOList());
-    System.out.println(convertService.getMethodCallExprDTOList());
+    // System.out.println(convertService.getMethodDeclarationDTOList());
+    // System.out.println(convertService.getMethodCallExprDTOList());
 
     // 원하는 파트만 출력
 
-    // for (ClassDTO cDto : convertService.getClassDTOList()) {
-    // System.out.println();
-    // System.out.printf("CLASSDTO: { classId: %d, name: %s, type: %s } \n",
-    // cDto.getClassId(), cDto.getName(),
-    // cDto.getType());
-    // }
+    for (ClassDTO cDto : convertService.getClassDTOList()) {
+      System.out.println();
+      System.out.printf("CLASSDTO: { classId: %d, name: %s, type: %s } \n",
+          cDto.getClassId(), cDto.getName(),
+          cDto.getType());
+    }
 
-    // for (MemberVariableDeclarationDTO mvd :
-    // convertService.getMemberVariableDeclarationDTOList()) {
-    // System.out.println();
-    // System.out.printf(
-    // "MemberVariableDeclarationDTO: { variableId: %d, name: %s, belongedClassId:
-    // %d, type: %s, typeClassId: %d } \n",
-    // mvd.getVariableId(), mvd.getName(), mvd.getBelongedClassId(), mvd.getType(),
-    // mvd.getTypeClassId());
-    // }
+    for (MemberVariableDeclarationDTO mvd : convertService.getMemberVariableDeclarationDTOList()) {
+      System.out.println();
+      System.out.printf(
+          "MemberVariableDeclarationDTO: { variableId: %d, name: %s, belongedClassId: %d, type: %s, typeClassId: %d } \n",
+          mvd.getVariableId(), mvd.getName(), mvd.getBelongedClassId(), mvd.getType(),
+          mvd.getTypeClassId());
+    }
 
-    // for (StmtVariableDeclarationDTO svd :
-    // convertService.getStmtVariableDeclarationDTOList()) {
-    // System.out.println();
-    // System.out.printf(
-    // "StmtVariableDeclarationDTO: { variableId: %d, name: %s, type: %s,
-    // typeClassId: %d } \n",
-    // svd.getVariableId(), svd.getName(), svd.getType(), svd.getTypeClassId());
-    // }
+    for (
 
-    // for (MethodDeclarationDTO md : convertService.getMethodDeclarationDTOList())
-    // {
-    // System.out.println();
-    // ReturnMapperDTO rm = md.getReturnMapper();
-    // System.out.printf(
-    // "MethodDeclarationDTO: { methodDeclarationId: %d, name: %s, belongedClassId:
-    // %d } \n",
-    // md.getMethodDeclId(), md.getName(), md.getBelongedClassId());
-    // System.out.printf("\tReturnMapperDto: { returnMapperId: %d, methodDeclId: %d,
-    // type: %s, typeClassId: %d } \n",
-    // rm.getReturnMapperId(), rm.getMethodDeclId(), rm.getType(),
-    // rm.getTypeClassId());
-    // }
+    StmtVariableDeclarationDTO svd : convertService.getStmtVariableDeclarationDTOList()) {
+      System.out.println();
+      System.out.printf(
+          "StmtVariableDeclarationDTO: { variableId: %d, name: %s, type: %s, typeClassId: %d }\n",
+          svd.getVariableId(), svd.getName(), svd.getType(), svd.getTypeClassId());
+    }
 
-    // for (MethodCallExprDTO mce : convertService.getMethodCallExprDTOList()) {
-    // System.out.println();
-    // System.out.printf(
-    // "MethodCallExprDTO: { methodCallExprId: %d, name: %s, NameExpr: %s,
-    // NameExprDeclarationId: %d } \n",
-    // mce.getMethodCallExprId(), mce.getName(), mce.getNameExpr(),
-    // mce.getNameExprTypeClassId());
-    // }
+    for (MethodDeclarationDTO md : convertService.getMethodDeclarationDTOList()) {
+      System.out.println();
+      ReturnMapperDTO rm = md.getReturnMapper();
+      System.out.printf(
+          "MethodDeclarationDTO: { methodDeclarationId: %d, name: %s, belongedClassId: %d }\n", md.getMethodDeclId(),
+          md.getName(), md.getBelongedClassId());
+      System.out.printf("\tReturnMapperDto:  { returnMapperId: %d, methodDeclId: %d,type: %s,typeClassId: %d}\n",
+          rm.getReturnMapperId(), rm.getMethodDeclId(), rm.getType(), rm.getTypeClassId());
+    }
+
+    for (MethodCallExprDTO mce : convertService.getMethodCallExprDTOList()) {
+      System.out.println();
+      System.out.printf(
+          "MethodCallExprDTO: { methodCallExprId: %d, name: %s, NameExpr: %s, NameExprDeclarationId: %d }\n",
+          mce.getMethodCallExprId(), mce.getName(), mce.getNameExpr(), mce.getNameExprTypeClassId());
+    }
 
     convertService.clear();
     TypeResolverService.clear();
