@@ -61,7 +61,6 @@ public class TypeResolverService {
       // String classWithPackage = tempCID.resolve().getQualifiedName();
       // String hashcode = classWithPackage + "#" + tempCID.hashCode();
       String hashcode = tempCID.resolve().getQualifiedName();
-      System.out.println("Class type 자기 자신 등록할 때 생성한 hashcode::getQualifiedName() " + hashcode);
       return hashcode;
     }
     return "";
@@ -84,8 +83,6 @@ public class TypeResolverService {
       } else if (typeName.equals("ParameterDTO")) {
         return parameterTypeMapper.getOriginDto(hashcode);
       }
-      System.out.println("타입 이름을 검증하는데 실패했습니다!! typeName:: " + typeName);
-      System.out.println("타입 이름을 검증하는데 실패했습니다!! hashCode::" + hashcode);
       return null;
     } catch (Exception e) {
       return null;
@@ -165,8 +162,6 @@ public class TypeResolverService {
   // MethodDeclarationMapper의 Ref List에 Origin id 등록
   public void registerOriginMethodDeclarationId(String hashcode) {
     try {
-      System.out.println();
-      System.out.println("register Origin MethodDeclaration Id - start:: " + hashcode);
       if (!methodTypeMapper.isOrignDtoExist(hashcode) || !methodTypeMapper.isRefDtoListExist(hashcode)) {
         String errorMessage = "등록할 DTO 또는 참조 리스트가 존재하지 않습니다.";
         System.out.println(errorMessage);
@@ -175,20 +170,14 @@ public class TypeResolverService {
         return;
       }
       Long registeredId = methodTypeMapper.getOriginDto(hashcode).getMethodDeclId();
-      System.out.println("register Origin MethodDeclaration Id - (1) registeredId:: " + registeredId);
 
-      System.out.println("register Origin MethodDeclaration Id - (2) setNameExprTypeClassId");
       List<MethodCallExprDTO> tempList = methodTypeMapper.getRefDtoList(hashcode);
       List<MethodCallExprDTO> newList = tempList.stream().map(mce -> {
         mce.setNameExprTypeClassId(registeredId);
-        System.out.println("iterator안에서 확인 " + mce);
-        System.out.println("iterator안에서 확인 " + mce.getNameExprTypeClassId());
         return mce;
       }).toList();
 
-      System.out.println("register Origin MethodDeclaration Id - (3) newList methodTypeMapper에 등록:: " + newList);
       methodTypeMapper.setRefDtoList(hashcode, newList);
-      System.out.println("register Origin MethodDeclaration Id - end");
     } catch (Exception e) {
       System.out.println("메소드 선언 Id를 List에 저장 중 에러 발생::: " + e.getMessage());
     }
@@ -197,8 +186,6 @@ public class TypeResolverService {
   // VariableTypeMapper List에 id 등록
   public void registerOriginClassIdToVTM(String hashcode) {
     try {
-      System.out.println();
-      System.out.println("register Origin Class Id to VTM- start:: " + hashcode);
       if (!variableTypeMapper.isOrignDtoExist(hashcode) || !variableTypeMapper.isRefDtoListExist(hashcode)) {
         String errorMessage = "등록할 DTO 또는 참조 리스트가 존재하지 않습니다.";
         System.out.println(errorMessage);
@@ -207,19 +194,15 @@ public class TypeResolverService {
         return;
       }
 
-      System.out.println("register Origin Class Id - (1)");
       Long registeredId = variableTypeMapper.getOriginDto(hashcode).getClassId();
       System.out.println(registeredId);
 
-      System.out.println("register Origin Class Id - (2)");
       List<VariableDeclarationDTO> tempList = variableTypeMapper.getRefDtoList(hashcode);
       List<VariableDeclarationDTO> newList = tempList.stream().map(vd -> {
         vd.setTypeClassId(registeredId);
         return vd;
       }).toList();
-      System.out.println("register Origin Class Id - (3)");
       variableTypeMapper.setRefDtoList(hashcode, newList);
-      System.out.println("register Origin Class Id - end");
     } catch (Exception e) {
       System.out.println("ClassId를 멤버&지역 변수 List에 저장 중 에러 발생::: " + e.getMessage());
     }
@@ -228,8 +211,6 @@ public class TypeResolverService {
   // ReturnTypeMapper List에 id 등록
   public void registerOriginClassIdToRTM(String hashcode) {
     try {
-      System.out.println();
-      System.out.println("register Origin Class Id to RTM- start:: " + hashcode);
       if (!returnTypeMapper.isOrignDtoExist(hashcode) || !returnTypeMapper.isRefDtoListExist(hashcode)) {
         String errorMessage = "등록할 DTO 또는 참조 리스트가 존재하지 않습니다.";
         System.out.println(errorMessage);
@@ -238,19 +219,15 @@ public class TypeResolverService {
         return;
       }
 
-      System.out.println("register Origin Class Id - (1)");
       Long registeredId = returnTypeMapper.getOriginDto(hashcode).getClassId();
       System.out.println(registeredId);
 
-      System.out.println("register Origin Class Id - (2)");
       List<ReturnMapperDTO> tempList = returnTypeMapper.getRefDtoList(hashcode);
       List<ReturnMapperDTO> newList = tempList.stream().map(vd -> {
         vd.setTypeClassId(registeredId);
         return vd;
       }).toList();
-      System.out.println("register Origin Class Id - (3)");
       returnTypeMapper.setRefDtoList(hashcode, newList);
-      System.out.println("register Origin Class Id - end");
     } catch (Exception e) {
       System.out.println("ClassId를 리턴타입 List에 저장 중 에러 발생::: " + e.getMessage());
     }
@@ -259,8 +236,6 @@ public class TypeResolverService {
   // ParameterTypeMapper List에 id 등록
   public void registerOriginClassIdToPTM(String hashcode) {
     try {
-      System.out.println();
-      System.out.println("register Origin Class Id to PTM- start:: " + hashcode);
       if (!parameterTypeMapper.isOrignDtoExist(hashcode) || !parameterTypeMapper.isRefDtoListExist(hashcode)) {
         String errorMessage = "등록할 DTO 또는 참조 리스트가 존재하지 않습니다.";
         System.out.println(errorMessage);
@@ -269,19 +244,15 @@ public class TypeResolverService {
         return;
       }
 
-      System.out.println("register Origin Class Id - (1)");
       Long registeredId = parameterTypeMapper.getOriginDto(hashcode).getClassId();
       System.out.println(registeredId);
 
-      System.out.println("register Origin Class Id - (2)");
       List<ParameterDTO> tempList = parameterTypeMapper.getRefDtoList(hashcode);
       List<ParameterDTO> newList = tempList.stream().map(vd -> {
         vd.setTypeClassId(registeredId);
         return vd;
       }).toList();
-      System.out.println("register Origin Class Id - (3)");
       parameterTypeMapper.setRefDtoList(hashcode, newList);
-      System.out.println("register Origin Class Id - end:: " + hashcode);
     } catch (Exception e) {
       System.out.println("ClassId를 파라미터 List에 저장 중 에러 발생::: " + e.getMessage());
     }
@@ -299,7 +270,6 @@ public class TypeResolverService {
       reflectionSolver.solveType(packageName);
       return true;
     } catch (Exception e) {
-      System.out.println("우리가 정의한 레퍼런스 타입입니다:: " + packageName);
       return false;
     }
   }
