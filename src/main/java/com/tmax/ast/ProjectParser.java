@@ -4,6 +4,8 @@ import com.github.javaparser.ParseResult;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.symbolsolver.utils.SymbolSolverCollectionStrategy;
 import com.github.javaparser.utils.*;
+import com.tmax.ast.dto.ClassDTO;
+import com.tmax.ast.dto.MemberVariableDeclarationDTO;
 import com.tmax.ast.dto.MethodCallExprDTO;
 import com.tmax.ast.dto.MethodDeclarationDTO;
 import com.tmax.ast.dto.StmtVariableDeclarationDTO;
@@ -86,6 +88,21 @@ public class ProjectParser {
 
     // System.out.println(convertService.getMethodDeclarationDTOList());
     // System.out.println(convertService.getMethodCallExprDTOList());
+
+    for (ClassDTO cDto : convertService.getClassDTOList()) {
+      System.out.println();
+      System.out.printf("CLASSDTO: { classId: %d, name: %s, type: %s } \n",
+          cDto.getClassId(), cDto.getName(),
+          cDto.getType());
+    }
+
+    for (MemberVariableDeclarationDTO mvd : convertService.getMemberVariableDeclarationDTOList()) {
+      System.out.println();
+      System.out.printf(
+          "MemberVariableDeclarationDTO: { variableId: %d, name: %s, belongedClassId: %d, type: %s, typeClassId: %d } \n",
+          mvd.getVariableId(), mvd.getName(), mvd.getBelongedClassId(), mvd.getType(),
+          mvd.getTypeClassId());
+    }
 
     for (StmtVariableDeclarationDTO svd : convertService.getStmtVariableDeclarationDTOList()) {
       System.out.println();
