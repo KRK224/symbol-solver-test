@@ -7,6 +7,8 @@ public class MethodCallExprDTO {
   private Long blockId;
   private Long methodCallExprId;
   private Long nameExprTypeClassId;
+  private Long nameExprTypeDeclarationId;
+
   private Position position;
   private String nameExpr;
   private List<ArgumentDTO> arguments;
@@ -41,6 +43,14 @@ public class MethodCallExprDTO {
 
   public void setNameExprTypeClassId(Long nameExprTypeClassId) {
     this.nameExprTypeClassId = nameExprTypeClassId;
+  }
+
+  public Long getNameExprTypeDeclarationId() {
+    return nameExprTypeDeclarationId;
+  }
+
+  public void setNameExprTypeDeclarationId(Long nameExprTypeDeclarationId) {
+    this.nameExprTypeDeclarationId = nameExprTypeDeclarationId;
   }
 
   public Position getPosition() {

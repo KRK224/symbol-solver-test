@@ -169,11 +169,14 @@ public class TypeResolverService {
         // throw e;
         return;
       }
-      Long registeredId = methodTypeMapper.getOriginDto(hashcode).getMethodDeclId();
+      MethodDeclarationDTO originMd = methodTypeMapper.getOriginDto(hashcode);
+      Long methodDeclarationId = originMd.getMethodDeclId();
+      Long typeClassId = originMd.getBelongedClassId();
 
       List<MethodCallExprDTO> tempList = methodTypeMapper.getRefDtoList(hashcode);
       List<MethodCallExprDTO> newList = tempList.stream().map(mce -> {
-        mce.setNameExprTypeClassId(registeredId);
+        mce.setNameExprTypeClassId(typeClassId);
+        mce.setNameExprTypeDeclarationId(methodDeclarationId);
         return mce;
       }).toList();
 
@@ -460,6 +463,7 @@ public class TypeResolverService {
         case "MethodCallExprDTO":
           MethodCallExprDTO tempMce = (MethodCallExprDTO) someRefDto;
           tempMce.setNameExprTypeClassId((long) -100);
+          tempMce.setNameExprTypeDeclarationId((long) -100);
           break;
         default:
           System.out.println("GetIsResolved - RefDTO의 타입 검증에 실패했습니다.:::" + typeName);
@@ -517,6 +521,7 @@ public class TypeResolverService {
         case "MethodCallExprDTO":
           MethodCallExprDTO tempMce = (MethodCallExprDTO) someRefDto;
           tempMce.setNameExprTypeClassId((long) -1);
+          tempMce.setNameExprTypeDeclarationId((long) -1);
           break;
         default:
           System.out.println("RefDTO의 타입 검증에 실패했습니다.:::" + typeName);
@@ -530,9 +535,11 @@ public class TypeResolverService {
 
       // 현재 등록된 MdDto가 있다.
       if (originMdDto != null) {
-        Long typeClassId = originMdDto.getMethodDeclId();
+        Long typeClassId = originMdDto.getBelongedClassId();
+        Long typeMethodDeclId = originMdDto.getMethodDeclId();
         MethodCallExprDTO tempMceDto = (MethodCallExprDTO) someRefDto;
         tempMceDto.setNameExprTypeClassId(typeClassId);
+        tempMceDto.setNameExprTypeDeclarationId(typeMethodDeclId);
         System.out
             .println("함수 호출의 Origin DTO가 존재하여 등록합니다!:: \n" + typeClassId + "\n" + originMdDto.getName());
       } else { // 현재 등록된 MdDto가 없는 경우, 등록 후 종료
