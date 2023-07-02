@@ -4,3 +4,5 @@ target
 output
 *.dot
 *.png
+
+result/
