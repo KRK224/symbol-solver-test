@@ -1,30 +1,25 @@
 package com.tmax.ast.service.Excel.impl;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.apache.poi.xssf.usermodel.XSSFCell;
-import org.apache.poi.xssf.usermodel.XSSFFont;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.poi.hssf.usermodel.HSSFFont;
+
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.VerticalAlignment;
+import org.apache.poi.xssf.usermodel.XSSFFont;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import com.tmax.ast.dto.MemberVariableDeclarationDTO;
 import com.tmax.ast.service.Excel.ExcelServiceInterface;
 
 public class MvdExcel implements ExcelServiceInterface {
-  List<String> columnList = new ArrayList<String>(
+  private List<String> columnList = new ArrayList<String>(
       Arrays.asList("id", "name", "belongedClassId", "type", "typeClassId"));
   private List<MemberVariableDeclarationDTO> dataList = new ArrayList<MemberVariableDeclarationDTO>();
 
@@ -49,7 +44,8 @@ public class MvdExcel implements ExcelServiceInterface {
 
   @Override
   public void createExcelSheet(XSSFWorkbook wb) throws Exception {
-    XSSFSheet sheet = wb.createSheet("MemberBariableDeclarationDTO");
+
+    XSSFSheet sheet = wb.createSheet("MemberVariableDeclarationDTO");
 
     CellStyle headStyle = wb.createCellStyle();
 
@@ -62,10 +58,10 @@ public class MvdExcel implements ExcelServiceInterface {
     headStyle.setAlignment(HorizontalAlignment.CENTER);
     headStyle.setVerticalAlignment(VerticalAlignment.CENTER);
 
-    XSSFRow titleRow = sheet.createRow(0);
+    Row titleRow = sheet.createRow(0);
     // 타이틀 컬럼 값 지정
     for (int i = 0; i < columnList.size(); i++) {
-      XSSFCell cell = titleRow.createCell(i);
+      Cell cell = titleRow.createCell(i);
       cell.setCellStyle(headStyle);
       cell.setCellValue(columnList.get(i));
     }
@@ -97,8 +93,6 @@ public class MvdExcel implements ExcelServiceInterface {
         }
       }
     }
-
-    // 파일 저장
 
   }
 
