@@ -22,7 +22,7 @@ import com.tmax.ast.service.Excel.ExcelServiceInterface;
 public class MceExcel implements ExcelServiceInterface {
 
   private List<String> columnList = new ArrayList<String>(
-      Arrays.asList("id", "name", "nameExpr", "nameExprTypeClassId", "nameExprDeclarationId"));
+      Arrays.asList("id", "name", "nameExpr", "nameExprTypeClassId"));
   private List<MethodCallExprDTO> dataList = new ArrayList<MethodCallExprDTO>();
 
   @Override
@@ -65,13 +65,8 @@ public class MceExcel implements ExcelServiceInterface {
             cell.setCellValue(current_mce.getNameExpr());
             break;
           case "nameExprTypeClassId":
-            cell.setCellValue(current_mce.getNameExprTypeClassId());
-            break;
-          case "nameExprDeclarationId":
-            if (current_mce.getNameExprTypeDeclarationId() != null) {
-              cell.setCellValue(current_mce.getNameExprTypeDeclarationId());
-            }
-
+            if (current_mce.getNameExprTypeClassId() != null)
+              cell.setCellValue(current_mce.getNameExprTypeClassId());
             break;
           default:
             System.out.println("column 값을 다시 확인해주세요");

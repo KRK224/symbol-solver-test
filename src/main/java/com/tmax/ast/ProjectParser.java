@@ -12,6 +12,12 @@ import com.tmax.ast.dto.StmtVariableDeclarationDTO;
 import com.tmax.ast.dto.ReturnMapperDTO;
 import com.tmax.ast.service.ConvertService;
 import com.tmax.ast.service.OutputService;
+import com.tmax.ast.service.Excel.ExcelService;
+import com.tmax.ast.service.Excel.impl.ClassExcel;
+import com.tmax.ast.service.Excel.impl.MceExcel;
+import com.tmax.ast.service.Excel.impl.MdExcel;
+import com.tmax.ast.service.Excel.impl.MvdExcel;
+import com.tmax.ast.service.Excel.impl.SvdExcel;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -127,6 +133,25 @@ public class ProjectParser {
       System.out.printf(
           "MethodCallExprDTO: { methodCallExprId: %d, name: %s, NameExpr: %s, NameExprDeclarationId: %d }\n",
           mce.getMethodCallExprId(), mce.getName(), mce.getNameExpr(), mce.getNameExprTypeClassId());
+    }
+
+    try {
+      ClassExcel classExcel = new ClassExcel();
+      classExcel.setDataList(convertService.getClassDTOList());
+      MceExcel mceExcel = new MceExcel();
+      mceExcel.setDataList(convertService.getMethodCallExprDTOList());
+      MdExcel mdExcel = new MdExcel();
+      mdExcel.setDataList(convertService.getMethodDeclarationDTOList());
+      MvdExcel mvdExcel = new MvdExcel();
+      mvdExcel.setDataList(convertService.getMemberVariableDeclarationDTOList());
+      SvdExcel svdExcel = new SvdExcel();
+      svdExcel.setDataList(convertService.getStmtVariableDeclarationDTOList());
+
+      ExcelService excelService = new ExcelService(classExcel, mceExcel, mdExcel, mvdExcel, svdExcel);
+      excelService.createExcelFile("java-baseball_old");
+
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
     }
 
     convertService.clear();
