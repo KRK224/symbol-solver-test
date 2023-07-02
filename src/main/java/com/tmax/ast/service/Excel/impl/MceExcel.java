@@ -65,7 +65,8 @@ public class MceExcel implements ExcelServiceInterface {
             cell.setCellValue(current_mce.getNameExpr());
             break;
           case "nameExprTypeClassId":
-            cell.setCellValue(current_mce.getNameExprTypeClassId());
+            if (current_mce.getNameExprTypeClassId() != null)
+              cell.setCellValue(current_mce.getNameExprTypeClassId());
             break;
           case "nameExprDeclarationId":
             if (current_mce.getNameExprTypeDeclarationId() != null) {
