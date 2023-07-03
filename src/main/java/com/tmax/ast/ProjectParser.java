@@ -37,7 +37,7 @@ public class ProjectParser {
     ConvertService convertService = new ConvertService();
     // 파싱할 프로젝트 루트 경로
     // Path root = Paths.get(("/Users/namgonkim/workspace/java-baseball"));
-    Path root = Paths.get(("/Users/krk224/Documents/Tmax/1_source/javaParser/java-baseball_origin"));
+    Path root = Paths.get(("/Users/krk224/Documents/Tmax/1_source/super-px"));
 
     // 파싱 전략 설정
     // 여기서 어케하면 jar에 있는 심볼이나 디렉토리 내에 있는 심볼을 매핑시킬 수 있다는데 좀더 조사가 필요함.
@@ -148,7 +148,7 @@ public class ProjectParser {
       svdExcel.setDataList(convertService.getStmtVariableDeclarationDTOList());
 
       ExcelService excelService = new ExcelService(classExcel, mceExcel, mdExcel, mvdExcel, svdExcel);
-      excelService.createExcelFile("java-baseball_old");
+      excelService.createExcelFile("super-px_origin");
 
     } catch (Exception e) {
       System.out.println(e.getMessage());
