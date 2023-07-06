@@ -10,7 +10,9 @@ import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.body.Parameter;
 import com.github.javaparser.ast.expr.MethodCallExpr;
 import com.github.javaparser.ast.expr.VariableDeclarationExpr;
+import com.github.javaparser.resolution.SymbolResolver;
 import com.github.javaparser.resolution.TypeSolver;
+import com.github.javaparser.resolution.declarations.ResolvedMethodDeclaration;
 import com.github.javaparser.resolution.types.ResolvedType;
 import com.github.javaparser.symbolsolver.resolution.typesolvers.ReflectionTypeSolver;
 import com.tmax.ast.dto.ClassDTO;
@@ -23,13 +25,22 @@ import com.tmax.ast.service.Resolver.dto.HashcodeDto;
 
 public class TypeResolverService {
 
+  private static TypeResolverService trs = new TypeResolverService();
+  private static final TypeSolver reflectionSolver = new ReflectionTypeSolver();
+
   private final TypeMapper<MethodDeclarationDTO, MethodCallExprDTO> methodTypeMapper = new TypeMapper<>();
   private final TypeMapper<ClassDTO, VariableDeclarationDTO> variableTypeMapper = new TypeMapper<>();
   private final TypeMapper<ClassDTO, ReturnMapperDTO> returnTypeMapper = new TypeMapper<>();
   private final TypeMapper<ClassDTO, ParameterDTO> parameterTypeMapper = new TypeMapper<>();
+  private SymbolResolver currentSymbolResolver;
 
-  private static TypeResolverService trs = new TypeResolverService();
-  private static final TypeSolver reflectionSolver = new ReflectionTypeSolver();
+  public SymbolResolver getCurrentSymbolResolver() {
+    return currentSymbolResolver;
+  }
+
+  public void setCurrentSymbolResolver(SymbolResolver currentSymbolResolver) {
+    this.currentSymbolResolver = currentSymbolResolver;
+  }
 
   // hide Constructor
   private TypeResolverService() {
@@ -52,6 +63,7 @@ public class TypeResolverService {
     String typeName = typeNameList[typeNameList.length - 1];
     if (typeName.equals("MethodDeclaration")) {
       MethodDeclaration tempMd = (MethodDeclaration) node;
+      // ResolvedMethodDeclaration rmd = tempMd.resolve();
       String hashcode = tempMd.resolve().getQualifiedSignature();
       // String classWithPackage = tempMd.resolve().getQualifiedName();
       // String hashcode = classWithPackage + "#" + tempMd.hashCode();
@@ -281,15 +293,16 @@ public class TypeResolverService {
   public static HashcodeDto generateMethodDeclarationHashCode(MethodCallExpr mce) {
 
     try {
+      ResolvedMethodDeclaration rmd = mce.resolve();
       // 임시로 Signature인 것도 추출
-      String mdQualifiedSignature = mce.resolve().getQualifiedSignature();
+      String mdQualifiedSignature = rmd.getQualifiedSignature();
       // hashcode int와 함께 생성
       // String hashcodeSignature = mdQualifiedSignature + "#" +
-      // mce.resolve().toAst().hashCode();
+      // rmd.toAst().hashCode();
 
       // resolve된 정보 추출
-      String mdQualifiedName = mce.resolve().getQualifiedName();
-      String packageClassName = mce.resolve().getPackageName() + "." + mce.resolve().getClassName();
+      String mdQualifiedName = rmd.getQualifiedName();
+      String packageClassName = rmd.getPackageName() + "." + rmd.getClassName();
       // hashcode int와 함께 생성
       // String hashcodeName = mdQualifiedName + "#" +
       // mce.resolve().toAst().hashCode();

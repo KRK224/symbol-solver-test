@@ -7,7 +7,7 @@ import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.body.Parameter;
 import com.github.javaparser.ast.expr.MethodCallExpr;
 import com.github.javaparser.ast.expr.VariableDeclarationExpr;
-import com.github.javaparser.resolution.types.ResolvedType;
+import com.github.javaparser.resolution.SymbolResolver;
 import com.tmax.ast.dto.*;
 import com.tmax.ast.service.management.*;
 import com.tmax.ast.service.Resolver.TypeResolverService;
@@ -76,6 +76,8 @@ public class ConvertService {
 
   private BlockDTO visitAndBuildRoot(CompilationUnit cu) {
     TypeResolverService trs = TypeResolverService.getInstance();
+    SymbolResolver currentSymbolResolver = cu.getSymbolResolver();
+    trs.setCurrentSymbolResolver(currentSymbolResolver);
 
     String nodeType = cu.getMetaModel().getTypeName();
     BlockDTO rootBlockDTO = blockService.buildBlock(blockId++, 1, null, nodeType, cu);
@@ -99,6 +101,7 @@ public class ConvertService {
         case "ClassOrInterfaceDeclaration":
           ClassDTO classDto = classService.buildClass(classId++, rootBlockDTO.getBlockId(),
               packageDTO != null ? packageDTO.getPackageId() : 0L, node);
+
           // TypeMapper Test Code
           String hashcode = TypeResolverService.getMyHashcode(node);
           if (!hashcode.isBlank()) {
