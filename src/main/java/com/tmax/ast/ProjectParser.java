@@ -36,6 +36,9 @@ public class ProjectParser {
             List<ParseResult<CompilationUnit>> parseResults = sourceRoot.tryToParse();
             for(ParseResult<CompilationUnit> parseResult : parseResults) {
                 Optional<CompilationUnit> optionalCompilationUnit = parseResult.getResult();
+                if(optionalCompilationUnit.isEmpty()) {
+                    System.out.println("This is Empty CU");
+                }
                 if(optionalCompilationUnit.isPresent()) {
                     CompilationUnit cu = optionalCompilationUnit.get();
 
