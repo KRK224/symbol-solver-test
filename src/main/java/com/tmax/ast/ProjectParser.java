@@ -38,6 +38,7 @@ public class ProjectParser {
                 Optional<CompilationUnit> optionalCompilationUnit = parseResult.getResult();
                 if(optionalCompilationUnit.isEmpty()) {
                     System.out.println("This is Empty CU");
+                    System.out.println("Hello World");
                 }
                 if(optionalCompilationUnit.isPresent()) {
                     CompilationUnit cu = optionalCompilationUnit.get();
